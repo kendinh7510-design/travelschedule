@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chill Chill Cùng Em Gái 🌿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #0d9488;
+      --teal-light: #14b8a6;
+      --teal-pale: #f0fdfa;
+      --teal-mid: #ccfbf1;
+      --orange: #f97316;
+      --orange-pale: #fff7ed;
+      --yellow-pale: #fefce8;
+      --yellow-border: #fde68a;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --white: #ffffff;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.05);
+      --shadow-lg: 0 8px 32px rgba(13,148,136,.15);
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--slate-50);
+      color: var(--slate-800);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--white);
+      box-shadow: 0 1px 0 var(--slate-200);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      background: var(--teal);
+      border-radius: 12px;
+      width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(13,148,136,.3);
+    }
+    .logo-title { font-size: 1.1rem; font-weight: 800; color: var(--slate-900); line-height: 1.2; }
+    .logo-sub { font-size: .78rem; color: var(--slate-500); font-weight: 500; }
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-pale);
+      color: var(--teal);
+      border: 1px solid var(--teal-mid);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* CARD BASE */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--slate-100);
+    }
+
+    /* LEFT PANEL */
+    .left-panel { padding: 24px; }
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      color: var(--slate-800);
+    }
+    .panel-title span.icon { color: var(--teal); font-size: 18px; }
+
+    /* TIMELINE */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      border-left: 2px solid var(--slate-200);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .timeline-item {
+      position: relative;
+      cursor: pointer;
+      transition: transform .2s;
+    }
+    .timeline-item:hover { transform: translateX(3px); }
+    .timeline-item.active { transform: translateX(5px); }
+    .timeline-dot {
+      position: absolute;
+      left: -39px;
+      top: 2px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 3px solid var(--slate-200);
+      background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .25s;
+    }
+    .timeline-item.active .timeline-dot {
+      background: var(--teal);
+      border-color: var(--teal-mid);
+      box-shadow: 0 0 0 4px rgba(13,148,136,.15);
+    }
+    .timeline-item.active .timeline-dot::after {
+      content: '';
+      display: block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: white;
+    }
+    .timeline-date {
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--slate-400);
+      margin-bottom: 2px;
+    }
+    .timeline-item.active .timeline-date { color: var(--teal); }
+    .timeline-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--slate-600);
+      line-height: 1.2;
+    }
+    .timeline-item.active .timeline-name { color: var(--slate-900); }
+    .timeline-transport {
+      font-size: .78rem;
+      color: var(--slate-400);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    /* BUDGET BOX */
+    .budget-box {
+      margin-top: 32px;
+      background: var(--orange-pale);
+      border: 1px solid #fed7aa;
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .budget-title {
+      font-weight: 800;
+      font-size: .9rem;
+      color: #9a3412;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .budget-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .budget-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: .8rem;
+      color: #7c2d12;
+      gap: 8px;
+    }
+    .budget-row span:last-child { font-weight: 700; white-space: nowrap; }
+    .budget-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: .88rem;
+      color: #7c2d12;
+      border-top: 1px solid #fdba74;
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+
+    /* RIGHT PANEL */
+    .detail-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--slate-100);
+    }
+    .detail-header {
+      background: linear-gradient(135deg, #0d9488 0%, #14b8a6 60%, #2dd4bf 100%);
+      padding: 32px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .detail-header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+    .detail-header::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 30%;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+    }
+    .detail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.2);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: .78rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .detail-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      font-family: 'Quicksand', sans-serif;
+      position: relative; z-index: 1;
+    }
+    .detail-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative; z-index: 1;
+    }
+    .detail-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,0,0,.12);
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: .8rem;
+      font-weight: 600;
+    }
+
+    /* DETAIL BODY */
+    .detail-body {
+      background: #fafbfc;
+      padding: 32px;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .section-title {
+      font-size: .95rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--slate-800);
+    }
+    .section-title .icon { font-size: 18px; }
+
+    /* ACTIVITY LIST */
+    .activity-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--white);
+      border: 1px solid var(--slate-100);
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+      font-size: .875rem;
+      color: var(--slate-700);
+      transition: box-shadow .2s;
+    }
+    .activity-item:hover { box-shadow: 0 4px 12px rgba(13,148,136,.1); }
+    .activity-dot {
+      background: #dbeafe;
+      color: #2563eb;
+      border-radius: 8px;
+      padding: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 12px;
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* FOOD LIST */
+    .food-list { display: flex; flex-direction: column; gap: 8px; }
+    .food-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--white);
+      border: 1px solid #fed7aa;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: .875rem;
+      color: var(--slate-700);
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    }
+    .food-icon { color: #fb923c; flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+
+    /* NOTE */
+    .note-box {
+      margin-top: 24px;
+      background: var(--yellow-pale);
+      border: 1px solid var(--yellow-border);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+    }
+    .note-icon { color: #ca8a04; flex-shrink: 0; font-size: 18px; margin-top: 1px; }
+    .note-label { font-weight: 800; font-size: .82rem; color: #854d0e; margin-bottom: 4px; }
+    .note-text { font-size: .85rem; color: #92400e; line-height: 1.6; white-space: pre-line; }
+
+    .empty-msg {
+      font-size: .83rem;
+      color: var(--slate-400);
+      font-style: italic;
+      padding: 16px;
+      background: rgba(0,0,0,.02);
+      border: 1px dashed var(--slate-200);
+      border-radius: 12px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .detail-title { font-size: 1.5rem; }
+      .header-badge { display: none; }
+    }
+    @media (max-width: 500px) {
+      main { padding: 20px 14px 40px; }
+      .detail-body { padding: 20px; }
+      .detail-header { padding: 22px; }
+    }
+
+    /* FADE ANIM */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .detail-card { animation: fadeIn .35s ease; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-icon">🗺️</div>
+      <div>
+        <div class="logo-title">Chill Chill Cùng Em Gái</div>
+        <div class="logo-sub">Bản đồ hành trình du lịch 2026</div>
+      </div>
+    </div>
+    <div class="header-badge">📅 27/05 – 08/06</div>
+  </div>
+</header>
+
+<main>
+  <div class="grid">
+    <!-- LEFT PANEL -->
+    <div class="card left-panel">
+      <div class="panel-title">
+        <span class="icon">📍</span> Lộ trình di chuyển
+      </div>
+
+      <div class="timeline" id="timeline"></div>
+
+      <div class="budget-box">
+        <div class="budget-title">💵 Tổng quan chi phí vé</div>
+        <ul class="budget-list">
+          <li class="budget-row"><span>Vé tàu Diêu Trì → Huế (27/05)</span><span>1.786.000đ</span></li>
+          <li class="budget-row"><span>Vé tàu Huế → Đồng Hới (31/05)</span><span>572.000đ</span></li>
+          <li class="budget-row"><span>Vé tàu Đồng Hới → Ninh Bình</span><span>1.772.000đ</span></li>
+          <li class="budget-row"><span>Vé máy bay HN → PY (2ng – 08/06)</span><span>4.484.000đ</span></li>
+          <li class="budget-row"><span>Vé Tuấn về PY (19/05)</span><span>1.294.000đ</span></li>
+        </ul>
+        <div class="budget-total"><span>Tổng cộng</span><span>9.908.000đ</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div id="detail-wrap"></div>
+  </div>
+</main>
+
+<script>
+const itinerary = [
+  {
+    id: "dieutri-hue",
+    date: "27/05 – 31/05",
+    title: "Diêu Trì ➔ Huế",
+    transport: "🚂 Tàu hỏa (8:00 AM – 4:50 PM, đi 8 tiếng)",
+    transportShort: "🚂 Tàu hỏa",
+    stay: "🏠 Ở Huế T4 đến Chủ Nhật",
+    activities: [
+      "Huyền Không Sơn Thượng (Hương Trà)",
+      "Hồ Thủy Tiên",
+      "Làng hoa giấy Thanh Tiên",
+      "Hueritage"
+    ],
+    food: [
+      "Bánh bèo, nậm, lọc Ba Cư (23 kiệt 177 Phan Đình Phùng)",
+      "Chè Mợ Tôn Đích (20 Đinh Tiên Hoàng)",
+      "Bánh ép Nguyễn Khoa Chiêm",
+      "Chợ Tây Lộc (bánh canh Nam Phổ, bún nghệ)",
+      "Ăn đêm Chợ An Cựu",
+      "Trà sữa sen Huế"
+    ],
+    note: ""
+  },
+  {
+    id: "hue-quangbinh",
+    date: "31/05 – 03/06",
+    title: "Huế ➔ Quảng Bình",
+    transport: "🚂 Tàu hỏa (12:15 PM – 3:20 PM, đi 3 tiếng)",
+    transportShort: "🚂 Tàu hỏa",
+    stay: "🕟 Chiều 4h30 CN (31.05) đến nơi",
+    activities: [
+      "Hoàng hôn biển Nhật Lệ",
+      "Nhà thờ Tam Tòa (Xây bằng đá)",
+      "Tour động Phong Nha – Thiên Đường (T2)",
+      "Chợ Đồng Hới"
+    ],
+    food: [],
+    note: "T3: Nhà thờ Tam Tòa"
+  },
+  {
+    id: "quangbinh-ninhbinh",
+    date: "03/06 – 05/06",
+    title: "Quảng Bình ➔ Ninh Bình",
+    transport: "🚂 Tàu hỏa (5:34 AM – 2:00 PM, đi 8 tiếng)",
+    transportShort: "🚂 Tàu hỏa",
+    stay: "🏠 ChiAn Homes (Chỗ ở)",
+    activities: [
+      "Nhà thờ Phát Diệm",
+      "Phố cổ Hoa Lư (Tối T4)",
+      "Tràng An (2-3 tiếng)",
+      "Chùa Bái Đính",
+      "Tam Cốc (2-3 tiếng)",
+      "Đan viện Châu Sơn (Mở 2:30 – 4:30 PM)",
+      "Xem thực cảnh anh hùng (Tối T6, 20h – 21h)"
+    ],
+    food: [
+      "Cà phê bến thuyền Tam Cốc",
+      "Dê núi tái chanh (Nhà hàng Phố Xưa)",
+      "Miến lươn",
+      "Bún Mộc Tố Như",
+      "Ốc núi hấp xả"
+    ],
+    note: "T4 đến nơi chiều 3pm. T5 đi Tràng An. T6 đi Tam Cốc."
+  },
+  {
+    id: "ninhbinh-hanoi",
+    date: "05/06 – 08/06",
+    title: "Ninh Bình ➔ Hà Nội",
+    transport: "🚌 Xe Limousine Bình Minh (Đi 1h20p, mỗi tiếng 1 chuyến)",
+    transportShort: "🚌 Xe Limousine",
+    stay: "📅 Từ sáng T6 đến T2",
+    activities: [
+      "Xem Xiếc (16h30 Thứ 7 và 10h CN, kéo dài 1h30p)",
+      "Múa Rối",
+      "Tinh Hoa Bắc Bộ (T4, T7, CN – Show: 19h30 – 20h45)",
+      "Chợ quê (5pm – 21h30)"
+    ],
+    food: [],
+    note: "Sáng 17-T2 bay"
+  },
+  {
+    id: "hanoi-phuyen",
+    date: "08/06",
+    title: "Hà Nội ➔ Phú Yên",
+    transport: "✈️ Máy bay (Vé đã mua)",
+    transportShort: "✈️ Máy bay",
+    stay: "",
+    activities: [],
+    food: [],
+    note: "Kết thúc hành trình 🎉"
+  }
+];
+
+let activeIndex = 0;
+
+function renderTimeline() {
+  const container = document.getElementById('timeline');
+  container.innerHTML = itinerary.map((step, i) => {
+    const dest = step.title.includes('➔') ? step.title.split('➔')[1].trim() : step.title;
+    const isActive = i === activeIndex;
+    return `
+      <div class="timeline-item ${isActive ? 'active' : ''}" onclick="setActive(${i})">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">${step.date}</div>
+        <div class="timeline-name">${dest}</div>
+        <div class="timeline-transport">${step.transportShort}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderDetail() {
+  const d = itinerary[activeIndex];
+  const wrap = document.getElementById('detail-wrap');
+  const actHTML = d.activities.length
+    ? `<ul class="activity-list">${d.activities.map(a => `<li class="activity-item"><span class="activity-dot">📍</span>${a}</li>`).join('')}</ul>`
+    : `<p class="empty-msg">Chưa có lịch trình hoạt động cụ thể.</p>`;
+
+  const foodHTML = d.food.length
+    ? `<div class="food-list">${d.food.map(f => `<div class="food-item"><span class="food-icon">☕</span>${f}</div>`).join('')}</div>`
+    : `<p class="empty-msg">Không có ghi chú ăn uống.</p>`;
+
+  const noteHTML = d.note
+    ? `<div class="note-box"><div class="note-icon">ℹ️</div><div><div class="note-label">Ghi chú hành trình</div><div class="note-text">${d.note}</div></div></div>`
+    : '';
+
+  const stayTag = d.stay ? `<div class="detail-tag">${d.stay}</div>` : '';
+
+  wrap.innerHTML = `
+    <div class="detail-card">
+      <div class="detail-header">
+        <div class="detail-badge">📅 ${d.date}</div>
+        <div class="detail-title">${d.title}</div>
+        <div class="detail-tags">
+          <div class="detail-tag">${d.transport}</div>
+          ${stayTag}
+        </div>
+      </div>
+      <div class="detail-body">
+        <div class="detail-grid">
+          <div>
+            <div class="section-title"><span class="icon">📸</span>Địa điểm & Hoạt động</div>
+            ${actHTML}
+          </div>
+          <div>
+            <div class="section-title"><span class="icon">🍜</span>Ăn uống & Đặc sản</div>
+            ${foodHTML}
+          </div>
+        </div>
+        ${noteHTML}
+      </div>
+    </div>
+  `;
+}
+
+function setActive(index) {
+  activeIndex = index;
+  renderTimeline();
+  renderDetail();
+}
+
+renderTimeline();
+renderDetail();
+</script>
+</body>
+</html>
